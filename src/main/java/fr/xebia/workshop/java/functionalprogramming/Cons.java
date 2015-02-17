@@ -42,6 +42,10 @@ public class Cons<A> implements List<A> {
     /*
      * Getters & setters.
      */
+    public A getHead() {
+        return head;
+    }
+
     public List<A> getTail() {
         return tail;
     }

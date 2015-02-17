@@ -3,8 +3,20 @@ package fr.xebia.workshop.java.functionalprogramming;
 public interface List<A> {
 
     @SuppressWarnings("unchecked")
+    default List<A> drop(final int n) {
+        if (this instanceof Cons) {
+            final Cons<A> cons = (Cons<A>) this;
+
+            if (n > 0) return cons.getTail().drop(n - 1);
+            else return new Cons(cons.getHead(), cons.getTail());
+
+        } else {
+            return Nil.INSTANCE;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
     default List<A> tail() {
-        if (this instanceof Cons) return ((Cons<A>) this).getTail();
-        else return Nil.INSTANCE;
+        return drop(1);
     }
 }

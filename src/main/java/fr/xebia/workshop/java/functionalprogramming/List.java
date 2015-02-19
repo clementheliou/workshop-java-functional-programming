@@ -18,11 +18,10 @@ public interface List<A> {
     }
 
     default <B> B foldRight(final B z, final BiFunction<A, B, B> f) {
-        if(this instanceof Cons) {
+        if (this instanceof Cons) {
             final Cons<A> cons = (Cons<A>) this;
             return f.apply(cons.getHead(), cons.getTail().foldRight(z, f));
-        }
-        else {
+        } else {
             return z;
         }
     }
@@ -40,8 +39,13 @@ public interface List<A> {
         }
     }
 
+    default Integer length() {
+        return foldRight(0, (x, total) -> total + 1);
+    }
+
     static Integer product(final List<Integer> values) {
-        return values.foldRight(1, (x, y) -> x * y);    }
+        return values.foldRight(1, (x, y) -> x * y);
+    }
 
 
     static Integer sum(final List<Integer> values) {

@@ -16,6 +16,19 @@ public interface List<A> {
     }
 
     @SuppressWarnings("unchecked")
+    default List<A> init() {
+        if (this instanceof Cons) {
+            final Cons<A> cons = (Cons<A>) this;
+
+            if (cons.getTail() instanceof Nil) return Nil.INSTANCE;
+            else return new Cons<>(cons.getHead(), cons.getTail().init());
+
+        } else {
+            return Nil.INSTANCE;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
     default List<A> tail() {
         return drop(1);
     }

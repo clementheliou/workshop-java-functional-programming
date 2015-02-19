@@ -1,5 +1,6 @@
 package fr.xebia.workshop.java.functionalprogramming;
 
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public interface Option<A> {
@@ -20,6 +21,16 @@ public interface Option<A> {
     default A getOrElse(final A defaultValue) {
         if (this instanceof Some) return ((Some<A>) this).getValue();
         else return defaultValue;
+    }
+
+    @SuppressWarnings("unchecked")
+    default <B> Option<B> map(final Function<A, B> f) {
+        if (this instanceof Some) {
+            final Some<A> some = (Some<A>) this;
+            return new Some<>(f.apply(some.getValue()));
+        } else {
+            return None.INSTANCE;
+        }
     }
 
     default Option<A> orElse(final Option<A> alternative) {

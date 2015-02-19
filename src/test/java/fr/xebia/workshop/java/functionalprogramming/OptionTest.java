@@ -120,28 +120,57 @@ public class OptionTest {
 
     // Exercise 5
 
-    //    @Test
-//    public void should_return_empty_option_when_map_is_called_on_empty_option() {
+    @Test
+    public void should_return_empty_option_when_map_is_called_on_empty_option() {
+
+        // Arrange
+        @SuppressWarnings("unchecked")
+        final Option<Integer> emptyOption = None.INSTANCE;
+
+        // Act
+        final Option<String> result = emptyOption.map(Object::toString);
+
+        // Assert
+        assertThat(result).isEqualTo(None.INSTANCE);
+    }
+
+    @Test
+    public void should_return_its_mapping_result_when_map_is_called_on_filled_option() {
+
+        // Arrange
+        final Option<Integer> anOption = new Some<>(6);
+
+        // Act
+        final Option<String> result = anOption.map(Object::toString);
+
+        // Assert
+        assertThat(result).isEqualTo(new Some<>("6"));
+    }
+
+    // Exercise 6
+
+//    @Test
+//    public void should_return_empty_option_when_flatMap_is_called_on_empty_option() {
 //
 //        // Arrange
 //        @SuppressWarnings("unchecked")
 //        final Option<Integer> emptyOption = None.INSTANCE;
 //
 //        // Act
-//        final Option<String> result = emptyOption.map(Object::toString);
+//        final Option<String> result = emptyOption.flatMap((i) -> new Some<>(i.toString()));
 //
 //        // Assert
 //        assertThat(result).isEqualTo(None.INSTANCE);
 //    }
 
 //    @Test
-//    public void should_return_its_mapping_result_when_map_is_called_on_filled_option() {
+//    public void should_return_mapping_result_when_flatMap_is_called_on_filled_option() {
 //
 //        // Arrange
 //        final Option<Integer> anOption = new Some<>(6);
 //
 //        // Act
-//        final Option<String> result = anOption.map(Object::toString);
+//        final Option<String> result = anOption.flatMap((i) -> new Some<>(i.toString()));
 //
 //        // Assert
 //        assertThat(result).isEqualTo(new Some<>("6"));

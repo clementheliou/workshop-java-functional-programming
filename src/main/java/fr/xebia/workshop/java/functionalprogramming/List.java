@@ -36,6 +36,13 @@ public interface List<A> {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    default <B> List<B> flatMap(final Function<A, List<B>> f) {
+        return map(f).foldRight((List<B>) Nil.INSTANCE, (current, total) -> {
+            return current.foldRight(total, Cons::new);
+        });
+    }
+
     default <B> B foldLeft(final B z, final BiFunction<B, A, B> f) {
         if (this instanceof Cons) {
             final Cons<A> cons = (Cons<A>) this;

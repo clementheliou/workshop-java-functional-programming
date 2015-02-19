@@ -379,30 +379,30 @@ public class ListTest {
 
     // Exercise 15
 
-//    @Test
-//    public void should_return_an_empty_list_when_flatMap_is_called_on_empty_list() {
-//
-//        // Arrange
-//        @SuppressWarnings("unchecked")
-//        final List<String> emptyList = Nil.INSTANCE;
-//
-//        // Act
-//        final List<String> result = emptyList.flatMap((name) -> new Cons<>(name.toUpperCase(), new Cons<>(name.toLowerCase())));
-//
-//        // Assert
-//        assertThat(result).isEqualTo(Nil.INSTANCE);
-//    }
+    @Test
+    public void should_return_an_empty_list_when_flatMap_is_called_on_empty_list() {
 
-//    @Test
-//    public void should_return_a_list_of_all_lowercased_uppercased_names_when_flatMap_is_called_on_non_empty_list() {
-//
-//        // Arrange
-//        final List<String> aList = new Cons<>("Harry", new Cons<>("Potter"));
-//
-//        // Act
-//        final List<String> result = aList.flatMap((name) -> new Cons<>(name.toUpperCase(), new Cons<>(name.toLowerCase())));
-//
-//        // Assert
-//        assertThat(result).isEqualTo(new Cons<>("HARRY", new Cons<>("harry", new Cons<>("POTTER", new Cons<>("potter")))));
-//    }
+        // Arrange
+        @SuppressWarnings("unchecked")
+        final List<String> emptyList = Nil.INSTANCE;
+
+        // Act
+        final List<String> result = emptyList.flatMap((name) -> new Cons<>(name.toUpperCase(), new Cons<>(name.toLowerCase())));
+
+        // Assert
+        assertThat(result).isEqualTo(Nil.INSTANCE);
+    }
+
+    @Test
+    public void should_return_a_list_of_all_lowercased_uppercased_names_when_flatMap_is_called_on_non_empty_list() {
+
+        // Arrange
+        final List<String> aList = new Cons<>("Harry", new Cons<>("Potter"));
+
+        // Act
+        final List<String> result = aList.flatMap((name) -> new Cons<>(name.toUpperCase(), new Cons<>(name.toLowerCase())));
+
+        // Assert
+        assertThat(result).isEqualTo(new Cons<>("HARRY", new Cons<>("harry", new Cons<>("POTTER", new Cons<>("potter")))));
+    }
 }

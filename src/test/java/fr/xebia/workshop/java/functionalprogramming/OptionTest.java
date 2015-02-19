@@ -49,7 +49,7 @@ public class OptionTest {
 
     // Exercise 3
 
-        @Test
+    @Test
     public void should_return_alternative_option_when_orElse_is_called_on_empty_option() {
 
         // Arrange
@@ -78,43 +78,72 @@ public class OptionTest {
 
     // Exercise 4
 
+    @Test
+    public void should_return_empty_option_when_filter_is_called_on_empty_option() {
+
+        // Arrange
+        @SuppressWarnings("unchecked")
+        final Option<Integer> emptyOption = None.INSTANCE;
+
+        // Act
+        final Option<Integer> result = emptyOption.filter((i) -> i % 2 == 0);
+
+        // Assert
+        assertThat(result).isEqualTo(None.INSTANCE);
+    }
+
+    @Test
+    public void should_return_empty_option_when_filter_is_called_on_filled_option_not_matching_it() {
+
+        // Arrange
+        final Option<Integer> anOption = new Some<>(7);
+
+        // Act
+        final Option<Integer> result = anOption.filter((i) -> i % 2 == 0);
+
+        // Assert
+        assertThat(result).isEqualTo(None.INSTANCE);
+    }
+
+    @Test
+    public void should_return_option_when_filter_is_called_on_filled_option_matching_it() {
+
+        // Arrange
+        final Option<Integer> anOption = new Some<>(6);
+
+        // Act
+        final Option<Integer> result = anOption.filter((i) -> i % 2 == 0);
+
+        // Assert
+        assertThat(result).isSameAs(anOption);
+    }
+
+    // Exercise 5
+
     //    @Test
-//    public void should_return_empty_option_when_filter_is_called_on_empty_option() {
+//    public void should_return_empty_option_when_map_is_called_on_empty_option() {
 //
 //        // Arrange
 //        @SuppressWarnings("unchecked")
 //        final Option<Integer> emptyOption = None.INSTANCE;
 //
 //        // Act
-//        final Option<Integer> result = emptyOption.filter((i) -> i % 2 == 0);
+//        final Option<String> result = emptyOption.map(Object::toString);
 //
 //        // Assert
 //        assertThat(result).isEqualTo(None.INSTANCE);
 //    }
 
 //    @Test
-//    public void should_return_empty_option_when_filter_is_called_on_filled_option_not_matching_it() {
-//
-//        // Arrange
-//        final Option<Integer> anOption = new Some<>(7);
-//
-//        // Act
-//        final Option<Integer> result = anOption.filter((i) -> i % 2 == 0);
-//
-//        // Assert
-//        assertThat(result).isEqualTo(None.INSTANCE);
-//    }
-
-//    @Test
-//    public void should_return_option_when_filter_is_called_on_filled_option_matching_it() {
+//    public void should_return_its_mapping_result_when_map_is_called_on_filled_option() {
 //
 //        // Arrange
 //        final Option<Integer> anOption = new Some<>(6);
 //
 //        // Act
-//        final Option<Integer> result = anOption.filter((i) -> i % 2 == 0);
+//        final Option<String> result = anOption.map(Object::toString);
 //
 //        // Assert
-//        assertThat(result).isSameAs(anOption);
+//        assertThat(result).isEqualTo(new Some<>("6"));
 //    }
 }

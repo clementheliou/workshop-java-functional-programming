@@ -4,15 +4,6 @@ import java.util.function.BiFunction;
 
 public interface List<A> {
 
-    static Integer compute(final List<Integer> values, final Integer neutral, final BiFunction<Integer, Integer, Integer> f) {
-        if (values instanceof Cons) {
-            final Cons<Integer> cons = (Cons<Integer>) values;
-            return f.apply(cons.getHead(), compute(cons.getTail(), neutral, f));
-        } else {
-            return neutral;
-        }
-    }
-
     @SuppressWarnings("unchecked")
     default List<A> drop(final int n) {
         if (this instanceof Cons) {
@@ -23,6 +14,16 @@ public interface List<A> {
 
         } else {
             return Nil.INSTANCE;
+        }
+    }
+
+    default <B> B foldRight(final B z, final BiFunction<A, B, B> f) {
+        if(this instanceof Cons) {
+            final Cons<A> cons = (Cons<A>) this;
+            return f.apply(cons.getHead(), cons.getTail().foldRight(z, f));
+        }
+        else {
+            return z;
         }
     }
 
@@ -40,12 +41,11 @@ public interface List<A> {
     }
 
     static Integer product(final List<Integer> values) {
-        return compute(values, 1, (x, y) -> x * y);
-    }
+        return values.foldRight(1, (x, y) -> x * y);    }
 
 
     static Integer sum(final List<Integer> values) {
-        return compute(values, 0, (x, y) -> x + y);
+        return values.foldRight(0, (x, y) -> x + y);
     }
 
     @SuppressWarnings("unchecked")

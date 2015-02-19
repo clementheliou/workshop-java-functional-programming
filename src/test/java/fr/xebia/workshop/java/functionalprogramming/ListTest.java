@@ -205,4 +205,32 @@ public class ListTest {
         // Assert
         assertThat(result).isEqualTo(120);
     }
+
+    // Exercise 8
+
+//    @Test
+//    public void should_return_zero_when_length_is_called_on_empty_list() {
+//
+//        // Arrange
+//        final List emptyList = Nil.INSTANCE;
+//
+//        // Act
+//        final Integer result = emptyList.length();
+//
+//        // Assert
+//        assertThat(result).isZero();
+//    }
+
+//    @Test
+//    public void should_return_list_size_when_length_is_called_on_non_empty_list() {
+//
+//        // Arrange
+//        final Cons<Integer> aList = new Cons<>(4, new Cons<>(6));
+//
+//        // Act
+//        final Integer result = aList.length();
+//
+//        // Assert
+//        assertThat(result).isEqualTo(2);
+//    }
 }

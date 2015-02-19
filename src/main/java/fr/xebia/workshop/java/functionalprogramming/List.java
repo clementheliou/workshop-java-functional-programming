@@ -2,6 +2,7 @@ package fr.xebia.workshop.java.functionalprogramming;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public interface List<A> {
 
@@ -16,6 +17,19 @@ public interface List<A> {
 
             if (n > 0) return cons.getTail().drop(n - 1);
             else return new Cons(cons.getHead(), cons.getTail());
+
+        } else {
+            return Nil.INSTANCE;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    default List<A> filter(final Predicate<A> p) {
+        if (this instanceof Cons) {
+            final Cons<A> cons = (Cons<A>) this;
+
+            if (p.test(cons.getHead())) return new Cons(cons.getHead(), cons.getTail().filter(p));
+            else return cons.getTail().filter(p);
 
         } else {
             return Nil.INSTANCE;

@@ -1,6 +1,17 @@
 package fr.xebia.workshop.java.functionalprogramming;
 
+import java.util.function.BiFunction;
+
 public interface List<A> {
+
+    static Integer compute(final List<Integer> values, final Integer neutral, final BiFunction<Integer, Integer, Integer> f) {
+        if (values instanceof Cons) {
+            final Cons<Integer> cons = (Cons<Integer>) values;
+            return f.apply(cons.getHead(), compute(cons.getTail(), neutral, f));
+        } else {
+            return neutral;
+        }
+    }
 
     @SuppressWarnings("unchecked")
     default List<A> drop(final int n) {
@@ -29,22 +40,12 @@ public interface List<A> {
     }
 
     static Integer product(final List<Integer> values) {
-        if (values instanceof Cons) {
-            final Cons<Integer> cons = (Cons<Integer>) values;
-            return cons.getHead() * product(cons.getTail());
-        } else {
-            return 1;
-        }
+        return compute(values, 1, (x, y) -> x * y);
     }
 
 
     static Integer sum(final List<Integer> values) {
-        if (values instanceof Cons) {
-            final Cons<Integer> cons = (Cons<Integer>) values;
-            return cons.getHead() + sum(cons.getTail());
-        } else {
-            return 0;
-        }
+        return compute(values, 0, (x, y) -> x + y);
     }
 
     @SuppressWarnings("unchecked")

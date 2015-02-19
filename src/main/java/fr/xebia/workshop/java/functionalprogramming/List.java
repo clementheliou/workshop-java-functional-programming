@@ -17,6 +17,18 @@ public interface List<A> {
         }
     }
 
+    default <B> B foldLeft(final B z, final BiFunction<B, A, B> f) {
+        if (this instanceof Cons) {
+            final Cons<A> cons = (Cons<A>) this;
+
+            if (cons.getTail() instanceof Nil) return f.apply(z, cons.getHead());
+            else return cons.getTail().foldLeft(f.apply(z, cons.getHead()), f);
+
+        } else {
+            return z;
+        }
+    }
+
     default <B> B foldRight(final B z, final BiFunction<A, B, B> f) {
         if (this instanceof Cons) {
             final Cons<A> cons = (Cons<A>) this;
@@ -40,16 +52,16 @@ public interface List<A> {
     }
 
     default Integer length() {
-        return foldRight(0, (x, total) -> total + 1);
+        return foldLeft(0, (total, y) -> total + 1);
     }
 
     static Integer product(final List<Integer> values) {
-        return values.foldRight(1, (x, y) -> x * y);
+        return values.foldLeft(1, (x, y) -> x * y);
     }
 
 
     static Integer sum(final List<Integer> values) {
-        return values.foldRight(0, (x, y) -> x + y);
+        return values.foldLeft(0, (x, y) -> x + y);
     }
 
     @SuppressWarnings("unchecked")

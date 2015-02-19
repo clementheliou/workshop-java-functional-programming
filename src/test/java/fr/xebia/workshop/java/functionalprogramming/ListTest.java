@@ -290,4 +290,46 @@ public class ListTest {
         // Assert
         assertThat(result).isEqualTo(new Cons<>("3", new Cons<>("6")));
     }
+
+    // Exercise 13
+
+//    @Test
+//    public void should_return_an_empty_list_when_filter_is_called_on_empty_list() {
+//
+//        // Arrange
+//        @SuppressWarnings("unchecked")
+//        final List<Integer> emptyList = Nil.INSTANCE;
+//
+//        // Act
+//        final List<Integer> result = emptyList.filter((p) -> p % 2 == 0);
+//
+//        // Assert
+//        assertThat(result).isEqualTo(Nil.INSTANCE);
+//    }
+
+//    @Test
+//    public void should_return_an_empty_list_when_filter_is_called_on_empty_list_with_a_predicate_that_does_not_match() {
+//
+//        // Arrange
+//        final List<Integer> aList = new Cons<>(3, new Cons<>(5));
+//
+//        // Act
+//        final List<Integer> result = aList.filter((p) -> p % 2 == 0);
+//
+//        // Assert
+//        assertThat(result).isEqualTo(Nil.INSTANCE);
+//    }
+
+//    @Test
+//    public void should_return_matching_elements_when_filter_is_called_on_empty_list_with_a_matching_predicate() {
+//
+//        // Arrange
+//        final List<Integer> aList = new Cons<>(2, new Cons<>(3, new Cons<>(5)));
+//
+//        // Act
+//        final List<Integer> result = aList.filter((p) -> p % 2 == 0);
+//
+//        // Assert
+//        assertThat(result).isEqualTo(new Cons<>(2));
+//    }
 }

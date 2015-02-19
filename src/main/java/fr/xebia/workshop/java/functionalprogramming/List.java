@@ -1,18 +1,13 @@
 package fr.xebia.workshop.java.functionalprogramming;
 
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public interface List<A> {
 
     @SuppressWarnings("unchecked")
     static List<Integer> addOne(final List<Integer> values) {
-        if (values instanceof Cons) {
-            final Cons<Integer> cons = (Cons<Integer>) values;
-            return new Cons<>(cons.getHead() + 1, addOne(cons.getTail()));
-        } else {
-            return Nil.INSTANCE;
-        }
-    }
+        return values.map((x) -> x + 1);    }
 
     @SuppressWarnings("unchecked")
     default List<A> drop(final int n) {
@@ -65,6 +60,16 @@ public interface List<A> {
         return foldLeft(0, (total, y) -> total + 1);
     }
 
+    @SuppressWarnings("unchecked")
+    default <B> List<B> map(final Function<A, B> f) {
+        if (this instanceof Cons) {
+            final Cons<A> cons = (Cons<A>) this;
+            return new Cons<>(f.apply(cons.getHead()), cons.getTail().map(f));
+        } else {
+            return Nil.INSTANCE;
+        }
+    }
+
     static Integer product(final List<Integer> values) {
         return values.foldLeft(1, (x, y) -> x * y);
     }
@@ -81,11 +86,5 @@ public interface List<A> {
 
     @SuppressWarnings("unchecked")
     static List<String> toString(final List<?> values) {
-        if (values instanceof Cons) {
-            final Cons<?> cons = (Cons<?>) values;
-            return new Cons<>(cons.getHead().toString(), toString(cons.getTail()));
-        } else {
-            return Nil.INSTANCE;
-        }
-    }
+        return values.map((x) -> x.toString());    }
 }

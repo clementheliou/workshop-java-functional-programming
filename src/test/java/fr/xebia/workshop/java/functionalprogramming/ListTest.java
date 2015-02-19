@@ -236,30 +236,58 @@ public class ListTest {
 
     // Exercise 10
 
+    @Test
+    public void should_return_an_empty_list_when_addOne_is_called_on_empty_list() {
+
+        // Arrange
+        @SuppressWarnings("unchecked")
+        final List<Integer> emptyList = Nil.INSTANCE;
+
+        // Act
+        final List<Integer> result = List.addOne(emptyList);
+
+        // Assert
+        assertThat(result).isEqualTo(Nil.INSTANCE);
+    }
+
+    @Test
+    public void should_increment_each_value_by_one_when_addOne_is_called_on_non_empty_integers_list() {
+
+        // Arrange
+        final List<Integer> aList = new Cons<>(2, new Cons<>(6));
+
+        // Act
+        final List<Integer> result = List.addOne(aList);
+
+        // Assert
+        assertThat(result).isEqualTo(new Cons<>(3, new Cons<>(7)));
+    }
+
+    // Exercise 11
+
 //    @Test
-//    public void should_return_an_empty_list_when_addOne_is_called_on_empty_list() {
+//    public void should_return_an_empty_list_when_toString_is_called_on_empty_list() {
 //
 //        // Arrange
-//        @SuppressWarnings("unchecked")
-//        final List<Integer> emptyList = Nil.INSTANCE;
+//        final List emptyList = Nil.INSTANCE;
 //
 //        // Act
-//        final List<Integer> result = List.addOne(emptyList);
+//        final List<String> result = List.toString(emptyList);
 //
 //        // Assert
 //        assertThat(result).isEqualTo(Nil.INSTANCE);
 //    }
 
 //    @Test
-//    public void should_increment_each_value_by_one_when_addOne_is_called_on_non_empty_integers_list() {
+//    public void should_give_each_element_string_representation_when_toString_is_called_on_non_empty_List() {
 //
 //        // Arrange
-//        final List<Integer> aList = new Cons<>(2, new Cons<>(6));
+//        final List<Integer> aList = new Cons<>(3, new Cons<>(6));
 //
 //        // Act
-//        final List<Integer> result = List.addOne(aList);
+//        final List<String> result = List.toString(aList);
 //
 //        // Assert
-//        assertThat(result).isEqualTo(new Cons<>(3, new Cons<>(7)));
+//        assertThat(result).isEqualTo(new Cons<>("3", new Cons<>("6")));
 //    }
 }

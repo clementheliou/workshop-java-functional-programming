@@ -5,6 +5,16 @@ import java.util.function.BiFunction;
 public interface List<A> {
 
     @SuppressWarnings("unchecked")
+    static List<Integer> addOne(final List<Integer> values) {
+        if (values instanceof Cons) {
+            final Cons<Integer> cons = (Cons<Integer>) values;
+            return new Cons<>(cons.getHead() + 1, addOne(cons.getTail()));
+        } else {
+            return Nil.INSTANCE;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
     default List<A> drop(final int n) {
         if (this instanceof Cons) {
             final Cons<A> cons = (Cons<A>) this;

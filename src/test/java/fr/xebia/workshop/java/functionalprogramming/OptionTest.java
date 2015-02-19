@@ -49,28 +49,70 @@ public class OptionTest {
 
     // Exercise 3
 
+        @Test
+    public void should_return_alternative_option_when_orElse_is_called_on_empty_option() {
+
+        // Arrange
+        @SuppressWarnings("unchecked")
+        final Option<Integer> emptyOption = None.INSTANCE;
+
+        // Act
+        final Option<Integer> result = emptyOption.orElse(new Some<>(6));
+
+        // Assert
+        assertThat(result).isEqualTo(new Some<>(6));
+    }
+
+    @Test
+    public void should_return_current_option_when_orElse_is_called_on_non_empty_option() {
+
+        // Arrange
+        final Option<Integer> anOption = new Some<>(6);
+
+        // Act
+        final Option<Integer> result = anOption.orElse(new Some<>(7));
+
+        // Assert
+        assertThat(result).isSameAs(anOption);
+    }
+
+    // Exercise 4
+
     //    @Test
-//    public void should_return_alternative_option_when_orElse_is_called_on_empty_option() {
+//    public void should_return_empty_option_when_filter_is_called_on_empty_option() {
 //
 //        // Arrange
 //        @SuppressWarnings("unchecked")
 //        final Option<Integer> emptyOption = None.INSTANCE;
 //
 //        // Act
-//        final Option<Integer> result = emptyOption.orElse(new Some<>(6));
+//        final Option<Integer> result = emptyOption.filter((i) -> i % 2 == 0);
 //
 //        // Assert
-//        assertThat(result).isEqualTo(new Some<>(6));
+//        assertThat(result).isEqualTo(None.INSTANCE);
 //    }
 
 //    @Test
-//    public void should_return_current_option_when_orElse_is_called_on_non_empty_option() {
+//    public void should_return_empty_option_when_filter_is_called_on_filled_option_not_matching_it() {
+//
+//        // Arrange
+//        final Option<Integer> anOption = new Some<>(7);
+//
+//        // Act
+//        final Option<Integer> result = anOption.filter((i) -> i % 2 == 0);
+//
+//        // Assert
+//        assertThat(result).isEqualTo(None.INSTANCE);
+//    }
+
+//    @Test
+//    public void should_return_option_when_filter_is_called_on_filled_option_matching_it() {
 //
 //        // Arrange
 //        final Option<Integer> anOption = new Some<>(6);
 //
 //        // Act
-//        final Option<Integer> result = anOption.orElse(new Some<>(7));
+//        final Option<Integer> result = anOption.filter((i) -> i % 2 == 0);
 //
 //        // Assert
 //        assertThat(result).isSameAs(anOption);

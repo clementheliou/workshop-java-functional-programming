@@ -6,4 +6,9 @@ public interface Option<A> {
         if (this instanceof Some) return ((Some<A>) this).getValue();
         else return defaultValue;
     }
+
+    default Option<A> orElse(final Option<A> alternative) {
+        if(this instanceof Some) return this;
+        else return alternative;
+    }
 }

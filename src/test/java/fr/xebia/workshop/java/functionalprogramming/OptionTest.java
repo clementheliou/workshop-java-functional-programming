@@ -2,6 +2,8 @@ package fr.xebia.workshop.java.functionalprogramming;
 
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class OptionTest {
 
     // Exercise 1
@@ -18,30 +20,59 @@ public class OptionTest {
 
     // Exercise 2
 
+    @Test
+    public void should_return_default_value_when_getOrElse_is_called_on_empty_option() {
+
+        // Arrange
+        @SuppressWarnings("unchecked")
+        final Option<Integer> emptyOption = None.INSTANCE;
+
+        // Act
+        final Integer result = emptyOption.getOrElse(0);
+
+        // Assert
+        assertThat(result).isEqualTo(0);
+    }
+
+    @Test
+    public void should_return_wrapped_value_when_getOrElse_is_called_on_filled_option() {
+
+        // Arrange
+        final Option<Integer> anOption = new Some<>(3);
+
+        // Act
+        final Integer result = anOption.getOrElse(0);
+
+        // Assert
+        assertThat(result).isEqualTo(3);
+    }
+
+    // Exercise 3
+
     //    @Test
-//    public void should_return_default_value_when_getOrElse_is_called_on_empty_option() {
+//    public void should_return_alternative_option_when_orElse_is_called_on_empty_option() {
 //
 //        // Arrange
 //        @SuppressWarnings("unchecked")
 //        final Option<Integer> emptyOption = None.INSTANCE;
 //
 //        // Act
-//        final Integer result = emptyOption.getOrElse(0);
+//        final Option<Integer> result = emptyOption.orElse(new Some<>(6));
 //
 //        // Assert
-//        assertThat(result).isEqualTo(0);
+//        assertThat(result).isEqualTo(new Some<>(6));
 //    }
 
 //    @Test
-//    public void should_return_wrapped_value_when_getOrElse_is_called_on_filled_option() {
+//    public void should_return_current_option_when_orElse_is_called_on_non_empty_option() {
 //
 //        // Arrange
-//        final Option<Integer> anOption = new Some<>(3);
+//        final Option<Integer> anOption = new Some<>(6);
 //
 //        // Act
-//        final Integer result = anOption.getOrElse(0);
+//        final Option<Integer> result = anOption.orElse(new Some<>(7));
 //
 //        // Assert
-//        assertThat(result).isEqualTo(3);
+//        assertThat(result).isSameAs(anOption);
 //    }
 }

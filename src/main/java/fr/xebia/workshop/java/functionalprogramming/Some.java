@@ -7,4 +7,11 @@ public class Some<A> implements Option<A> {
     public Some(final A value) {
         this.value = value;
     }
+
+    /*
+     * Getters & setters.
+     */
+    public A getValue() {
+        return value;
+    }
 }

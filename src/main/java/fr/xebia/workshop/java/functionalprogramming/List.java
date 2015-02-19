@@ -78,4 +78,14 @@ public interface List<A> {
     default List<A> tail() {
         return drop(1);
     }
+
+    @SuppressWarnings("unchecked")
+    static List<String> toString(final List<?> values) {
+        if (values instanceof Cons) {
+            final Cons<?> cons = (Cons<?>) values;
+            return new Cons<>(cons.getHead().toString(), toString(cons.getTail()));
+        } else {
+            return Nil.INSTANCE;
+        }
+    }
 }

@@ -335,45 +335,74 @@ public class ListTest {
 
     // Exercise 14
 
+    @Test
+    public void should_return_the_left_list_when_joining_an_non_empty_list_with_an_empty_one() {
+
+        // Arrange
+        final List<Integer> nonEmptyList = new Cons<>(2);
+
+        // Act
+        @SuppressWarnings("unchecked")
+        final List<Integer> result = List.join(nonEmptyList, Nil.INSTANCE);
+
+        // Assert
+        assertThat(result).isEqualTo(nonEmptyList);
+    }
+
+    @Test
+    public void should_return_the_right_list_when_joining_an_empty_list_with_an_non_empty_one() {
+
+        // Arrange
+        final List<Integer> nonEmptyList = new Cons<>(2);
+
+        // Act
+        @SuppressWarnings("unchecked")
+        final List<Integer> result = List.join(Nil.INSTANCE, nonEmptyList);
+
+        // Assert
+        assertThat(result).isEqualTo(nonEmptyList);
+    }
+
+    @Test
+    public void should_return_list_concatenation_when_joining_non_empty_lists() {
+
+        // Arrange
+        final List<Integer> left = new Cons<>(2, new Cons<>(4));
+        final List<Integer> right = new Cons<>(5, new Cons<>(8));
+
+        // Act
+        final List<Integer> result = List.join(left, right);
+
+        // Assert
+        assertThat(result).isEqualTo(new Cons<>(2, new Cons<>(4, new Cons<>(5, new Cons<>(8)))));
+    }
+
+    // Exercise 15
+
 //    @Test
-//    public void should_return_the_left_list_when_joining_an_non_empty_list_with_an_empty_one() {
+//    public void should_return_an_empty_list_when_flatMap_is_called_on_empty_list() {
 //
 //        // Arrange
-//        final List<Integer> nonEmptyList = new Cons<>(2);
+//        @SuppressWarnings("unchecked")
+//        final List<String> emptyList = Nil.INSTANCE;
 //
 //        // Act
-//        @SuppressWarnings("unchecked")
-//        final List<Integer> result = List.join(nonEmptyList, Nil.INSTANCE);
+//        final List<String> result = emptyList.flatMap((name) -> new Cons<>(name.toUpperCase(), new Cons<>(name.toLowerCase())));
 //
 //        // Assert
-//        assertThat(result).isEqualTo(nonEmptyList);
+//        assertThat(result).isEqualTo(Nil.INSTANCE);
 //    }
 
 //    @Test
-//    public void should_return_the_right_list_when_joining_an_empty_list_with_an_non_empty_one() {
+//    public void should_return_a_list_of_all_lowercased_uppercased_names_when_flatMap_is_called_on_non_empty_list() {
 //
 //        // Arrange
-//        final List<Integer> nonEmptyList = new Cons<>(2);
+//        final List<String> aList = new Cons<>("Harry", new Cons<>("Potter"));
 //
 //        // Act
-//        @SuppressWarnings("unchecked")
-//        final List<Integer> result = List.join(Nil.INSTANCE, nonEmptyList);
+//        final List<String> result = aList.flatMap((name) -> new Cons<>(name.toUpperCase(), new Cons<>(name.toLowerCase())));
 //
 //        // Assert
-//        assertThat(result).isEqualTo(nonEmptyList);
-//    }
-
-//    @Test
-//    public void should_return_list_concatenation_when_joining_non_empty_lists() {
-//
-//        // Arrange
-//        final List<Integer> left = new Cons<>(2, new Cons<>(4));
-//        final List<Integer> right = new Cons<>(5, new Cons<>(8));
-//
-//        // Act
-//        final List<Integer> result = List.join(left, right);
-//
-//        // Assert
-//        assertThat(result).isEqualTo(new Cons<>(2, new Cons<>(4, new Cons<>(5, new Cons<>(8)))));
+//        assertThat(result).isEqualTo(new Cons<>("HARRY", new Cons<>("harry", new Cons<>("POTTER", new Cons<>("potter")))));
 //    }
 }

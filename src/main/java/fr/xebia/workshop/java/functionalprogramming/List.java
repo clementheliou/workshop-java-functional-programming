@@ -70,6 +70,16 @@ public interface List<A> {
         }
     }
 
+    static <A> List<A> join(final List<A> left, final List<A> right) {
+        if (left instanceof Nil) return right;
+        if (right instanceof Nil) return left;
+
+        final Cons<A> cons = (Cons<A>) left;
+
+        if (cons.getTail() instanceof Nil) return new Cons<>(cons.getHead(), right);
+        else return new Cons<>(cons.getHead(), join(cons.getTail(), right));
+    }
+
     default Integer length() {
         return foldLeft(0, (total, y) -> total + 1);
     }

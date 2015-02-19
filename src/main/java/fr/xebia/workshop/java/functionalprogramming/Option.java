@@ -18,6 +18,16 @@ public interface Option<A> {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    default <B> Option<B> flatMap(final Function<A, Option<B>> f) {
+        if (this instanceof Some) {
+            final Some<A> some = (Some<A>) this;
+            return f.apply(some.getValue());
+        } else {
+            return None.INSTANCE;
+        }
+    }
+
     default A getOrElse(final A defaultValue) {
         if (this instanceof Some) return ((Some<A>) this).getValue();
         else return defaultValue;

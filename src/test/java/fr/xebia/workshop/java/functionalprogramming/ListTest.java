@@ -179,30 +179,30 @@ public class ListTest {
 
     // Exercise 6
 
-//    @Test
-//    public void should_return_one_when_product_is_called_on_empty_list() {
-//
-//        // Arrange
-//        @SuppressWarnings("unchecked")
-//        final List<Integer> emptyList = Nil.INSTANCE;
-//
-//        // Act
-//        final Integer result = List.product(emptyList);
-//
-//        // Assert
-//        assertThat(result).isEqualTo(1);
-//    }
+    @Test
+    public void should_return_one_when_product_is_called_on_empty_list() {
 
-//    @Test
-//    public void should_return_the_product_of_values_when_product_is_called_on_non_empty_list() {
-//
-//        // Arrange
-//        final List<Integer> aList = new Cons<>(2, new Cons<>(5, new Cons<>(12)));
-//
-//        // Act
-//        final Integer result = List.product(aList);
-//
-//        // Assert
-//        assertThat(result).isEqualTo(120);
-//    }
+        // Arrange
+        @SuppressWarnings("unchecked")
+        final List<Integer> emptyList = Nil.INSTANCE;
+
+        // Act
+        final Integer result = List.product(emptyList);
+
+        // Assert
+        assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    public void should_return_the_product_of_values_when_product_is_called_on_non_empty_list() {
+
+        // Arrange
+        final List<Integer> aList = new Cons<>(2, new Cons<>(5, new Cons<>(12)));
+
+        // Act
+        final Integer result = List.product(aList);
+
+        // Assert
+        assertThat(result).isEqualTo(120);
+    }
 }

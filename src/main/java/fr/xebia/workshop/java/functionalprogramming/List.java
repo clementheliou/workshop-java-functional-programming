@@ -28,6 +28,16 @@ public interface List<A> {
         }
     }
 
+    static Integer product(final List<Integer> values) {
+        if (values instanceof Cons) {
+            final Cons<Integer> cons = (Cons<Integer>) values;
+            return cons.getHead() * product(cons.getTail());
+        } else {
+            return 1;
+        }
+    }
+
+
     static Integer sum(final List<Integer> values) {
         if (values instanceof Cons) {
             final Cons<Integer> cons = (Cons<Integer>) values;

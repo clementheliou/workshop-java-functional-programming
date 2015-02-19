@@ -150,30 +150,59 @@ public class ListTest {
 
     // Exercise 5
 
+    @Test
+    public void should_return_zero_when_sum_is_called_on_empty_list() {
+
+        // Arrange
+        @SuppressWarnings("unchecked")
+        final List<Integer> emptyList = Nil.INSTANCE;
+
+        // Act
+        final Integer result = List.sum(emptyList);
+
+        // Assert
+        assertThat(result).isZero();
+    }
+
+    @Test
+    public void should_return_the_sum_of_values_when_sum_is_called_on_non_empty_list() {
+
+        // Arrange
+        final List<Integer> aList = new Cons<>(3, new Cons<>(5, new Cons<>(9)));
+
+        // Act
+        final Integer result = List.sum(aList);
+
+        // Assert
+        assertThat(result).isEqualTo(17);
+    }
+
+    // Exercise 6
+
 //    @Test
-//    public void should_return_zero_when_sum_is_called_on_empty_list() {
+//    public void should_return_one_when_product_is_called_on_empty_list() {
 //
 //        // Arrange
 //        @SuppressWarnings("unchecked")
 //        final List<Integer> emptyList = Nil.INSTANCE;
 //
 //        // Act
-//        final Integer result = List.sum(emptyList);
+//        final Integer result = List.product(emptyList);
 //
 //        // Assert
-//        assertThat(result).isZero();
+//        assertThat(result).isEqualTo(1);
 //    }
 
 //    @Test
-//    public void should_return_the_sum_of_values_when_sum_is_called_on_non_empty_list() {
+//    public void should_return_the_product_of_values_when_product_is_called_on_non_empty_list() {
 //
 //        // Arrange
-//        final List<Integer> aList = new Cons<>(3, new Cons<>(5, new Cons<>(9)));
+//        final List<Integer> aList = new Cons<>(2, new Cons<>(5, new Cons<>(12)));
 //
 //        // Act
-//        final Integer result = List.sum(aList);
+//        final Integer result = List.product(aList);
 //
 //        // Assert
-//        assertThat(result).isEqualTo(17);
+//        assertThat(result).isEqualTo(120);
 //    }
 }

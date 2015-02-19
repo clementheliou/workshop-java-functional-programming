@@ -28,6 +28,15 @@ public interface List<A> {
         }
     }
 
+    static Integer sum(final List<Integer> values) {
+        if (values instanceof Cons) {
+            final Cons<Integer> cons = (Cons<Integer>) values;
+            return cons.getHead() + sum(cons.getTail());
+        } else {
+            return 0;
+        }
+    }
+
     @SuppressWarnings("unchecked")
     default List<A> tail() {
         return drop(1);

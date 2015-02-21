@@ -115,7 +115,7 @@ Une option est un type qui contient 0 ou 1 valeur.
 * un élément non vide (type nommé `Some`)
 
 ###Exercice 1
-Créer la classe `Option`.
+Créer le type `Option`.
 
 ###Exercice 2
 Créer une méthode `getOrElse`dont la signature est:
